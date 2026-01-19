@@ -11,14 +11,13 @@
 - Click Create.
 
 3. Import SQL file / Manually Create the Table
-   3.1 Import the Database
-   - Unzip the forestdb file.
-   - Click on the forestdb database.
-   - Select the Import tab.
-   - Click Choose File and select your .sql file
-   - Click 'Go' to execute.
+- Unzip the forestdb file.
+- Click on the forestdb database.
+- Select the Import tab.
+- Click Choose File and select your .sql file
+- Click 'Go' to execute.
 
-4. Launch the Homepage
+5. Launch the Homepage
 
 - Copy the project folder to C:\xampp\htdocs\.
 - Open your browser and go to http://localhost/pokok/home.php
