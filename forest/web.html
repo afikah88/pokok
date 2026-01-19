@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dropdown Menu Example</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Navbar fixed to top */
+    .w3-bar{
+      position: fixed;
+      top: 0;
+    }
+    .w3-dropdown-content {
+      position: fixed;
+      left: 50px; /* Align below the parent for Production */
+      z-index: 1; /* Ensure it stays above other elements */
+      display: none; /* Hidden by default */
+    }
+
+    .w3-dropdown-hover:hover .w3-dropdown-content {
+      display: block; /* Show dropdown on hover */
+    }
+
+    /* Update for Production dropdown */
+    .w3-dropdown-content.production-dropdown {
+      left: 310px; /* Align below the parent for Production */
+    }
+
+    /* Update for Damage dropdown */
+    .w3-dropdown-content.damage-dropdown {
+      left: 450px; /* Shift it more to the right for Damage */
+    }
+
+    /* Update for Growth30 dropdown */
+    .w3-dropdown-content.growth30-dropdown {
+      left: 580px; /* Shift it more to the right for Growth30 */
+    }
+
+    /* Update for Final Output dropdown */
+    .w3-dropdown-content.final-output-dropdown {
+      left: 710px; /* Shift it more to the right for Final Output */
+    }
+
+    /* Submenu style */
+    .sub-dropdown-content {
+      position: absolute;
+      left: 100%; /* Align beside the parent dropdown */
+      top: 0;
+      display: none; /* Hidden by default */
+      z-index: 2;
+      background-color: #ffffff;
+    }
+
+    /* Show sub-submenu on hover */
+    .sub-dropdown:hover .sub-dropdown-content {
+      display: block;
+    }
+
+    /* Specific hover behavior: only the hovered item turns gray */
+    .w3-bar-item:hover {
+      background-color: transparent; /* Gray background on hover */
+      color: black; /* Optional: Ensure text is visible */
+    }
+
+    /* Center-align the text in Growth30 dropdown */
+    .growth30-dropdown .w3-bar-item,
+    .final-output-dropdown .w3-bar-item {
+      text-align: center; /* Center-align the text */
+    }
+	
+	/* Change font color for the home section */
+#home {
+  color: white; /* Example: White text color */
+}
+
+/* Change font color for the Tree PerHa section */
+#treeperha {
+  color: green; /* Example: Green text color */
+}
+
+/* Change font color for the Fell Tree section */
+#felltree {
+  color: brown; /* Example: Brown text color */
+}
+
+/* Change font color for the Production section */
+#product {
+  color: blue; /* Example: Blue text color */
+}
+
+/* Change font color for the Damage section */
+#damage {
+  color: red; /* Example: Red text color */
+}
+
+/* Change font color for the Growth30 section */
+#growth30 {
+  color: purple; /* Example: Purple text color */
+}
+
+/* Change font color for the Final Output section */
+#finaloutput {
+  color: black; /* Example: Black text color */
+}
+
+/* Change font color for the Tree Distribution section */
+#tree-distribution {
+  color: orange; /* Example: Orange text color */
+}
+
+/* Change font color for the Analysis section */
+#analysis {
+  color: teal; /* Example: Teal text color */
+}
+
+
+/* Background images for specific sections */
+#home {
+  background-size: auto;
+  background-image: url('file:///C:/Users/fadzl/Downloads/images/1.png');
+}
+
+#treeperha {
+  background-image: url('file:///C:/Users/fadzl/Downloads/images/2.png');
+  background-size: cover;
+  background-position: center;
+}
+
+#felltree {
+  background-image: url('file:///C:/Users/fadzl/Downloads/images/');
+  background-size: cover;
+  background-position: center;
+}
+
+#prod0{
+  background-image: url('file:///C:/Users/fadzl/Downloads/images/1 (2).png');
+  background-size: cover;
+  background-position: center;
+}
+
+#prod30{
+  background-image: url('file:///C:/Users/fadzl/Downloads/images/1 (2).png');
+  background-size: cover;
+  background-position: center;
+}
+
+#stemdamage {
+  background-image: url('file:///C:/Users/fadzl/Downloads/images/3.png');
+  background-size: cover;
+  background-position: center;
+}
+
+#crowndamage{
+  background-image: url('file:///C:/Users/fadzl/Downloads/images/3.png');
+  background-size: cover;
+  background-position: center;
+}
+
+#growth30 {
+  background-image: url('file:///C:/Users/fadzl/Downloads/images/4.png');
+  background-size: cover;
+  background-position: center;
+}
+
+#finaloutput {
+  background-image: url('file:///C:/Users/fadzl/Downloads/images/');
+  background-size: cover;
+  background-position: center;
+}
+
+#tree-distribution {
+  background-image: url('file:///C:/Users/fadzl/Downloads/images/5.png');
+  background-size: cover;
+  background-position: center;
+}
+
+#analysis {
+  background-image: url('file:///C:/Users/fadzl/Downloads/images/');
+  background-size: cover;
+  background-position: center;
+}
+
+
+
+    /* Style for sections */
+    .section {
+      padding: 50px 0;
+      margin-top: 60px; /* Make space for fixed navbar */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    /* Button to show navbar */
+    #showNavbarButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #f1f1f1;
+      color: #555;
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #showNavbarButton:hover {
+      background-color: #ddd;
+    }
+
+    /* Ensuring content sections have space between them */
+    body {
+      padding-top: 60px; /* Adjust body to make space for fixed navbar */
+    }
+
+    .section {
+      height: 100vh;
+      padding: 60px;
+	  margin-top: -20px;
+    }
+
+
+	
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<!-- Navbar -->
+<div class="w3-bar w3-light-grey">
+  <!-- Home -->
+  <a href="#home" class="w3-bar-item w3-button"><i class="fas fa-home"></i> Home</a>
+
+  <!-- Tree PerHa -->
+  <a href="#treeperha" class="w3-bar-item w3-button"><i class="fas fa-tree"></i> Tree PerHa</a>
+
+  <!-- Fell Tree -->
+  <a href="#felltree" class="w3-bar-item w3-button"><i class="fas fa-tools"></i> Fell Tree</a>
+
+  <!-- Dropdown for PRODUCTION -->
+  <div class="w3-dropdown-hover">
+    <button class="w3-button"><i class="fas fa-cogs"></i> Production</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border production-dropdown">
+      <!-- Subcategories -->
+      <div class="w3-bar-item sub-dropdown">
+        <a href="#prod0" class="w3-button"><i class="fas fa-cogs"></i> Production 0</a>
+        <div class="sub-dropdown-content w3-bar-block w3-border">
+          <a href="#prod0-45cm" class="w3-bar-item w3-button">45cm</a>
+          <a href="#prod0-50cm" class="w3-bar-item w3-button">50cm</a>
+          <a href="#prod0-55cm" class="w3-bar-item w3-button">55cm</a>
+          <a href="#prod0-60cm" class="w3-bar-item w3-button">60cm</a>
+          <a href="#prod0-65cm" class="w3-bar-item w3-button">65cm</a>
+        </div>
+      </div>
+      <div class="w3-bar-item sub-dropdown">
+        <a href="#prod30" class="w3-button"><i class="fas fa-cogs"></i> Production 30</a>
+        <div class="sub-dropdown-content w3-bar-block w3-border">
+          <a href="#prod30-45cm" class="w3-bar-item w3-button">45cm</a>
+          <a href="#prod30-50cm" class="w3-bar-item w3-button">50cm</a>
+          <a href="#prod30-55cm" class="w3-bar-item w3-button">55cm</a>
+          <a href="#prod30-60cm" class="w3-bar-item w3-button">60cm</a>
+          <a href="#prod30-65cm" class="w3-bar-item w3-button">65cm</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dropdown for DAMAGE -->
+  <div class="w3-dropdown-hover">
+    <button class="w3-button"><i class="fas fa-exclamation-triangle"></i> Damage</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border damage-dropdown">
+      <!-- Subcategories -->
+      <div class="w3-bar-item sub-dropdown">
+        <a href="#stemdamage" class="w3-button"><i class="fas fa-leaf"></i> Stem Damage</a>
+        <div class="sub-dropdown-content w3-bar-block w3-border">
+          <a href="#stemdamage-45cm" class="w3-bar-item w3-button">45cm</a>
+          <a href="#stemdamage-50cm" class="w3-bar-item w3-button">50cm</a>
+          <a href="#stemdamage-55cm" class="w3-bar-item w3-button">55cm</a>
+          <a href="#stemdamage-60cm" class="w3-bar-item w3-button">60cm</a>
+          <a href="#stemdamage-65cm" class="w3-bar-item w3-button">65cm</a>
+        </div>
+      </div>
+      <div class="w3-bar-item sub-dropdown">
+        <a href="#crowndamage" class="w3-button"><i class="fas fa-leaf"></i> Crown Damage</a>
+        <div class="sub-dropdown-content w3-bar-block w3-border">
+          <a href="#crowndamage-45cm" class="w3-bar-item w3-button">45cm</a>
+          <a href="#crowndamage-50cm" class="w3-bar-item w3-button">50cm</a>
+          <a href="#crowndamage-55cm" class="w3-bar-item w3-button">55cm</a>
+          <a href="#crowndamage-60cm" class="w3-bar-item w3-button">60cm</a>
+          <a href="#crowndamage-65cm" class="w3-bar-item w3-button">65cm</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Growth30 -->
+<div class="w3-dropdown-hover">
+  <a href="#growth30" class="w3-button"><i class="fas fa-leaf"></i> Growth30</a>
+  <div class="w3-dropdown-content w3-bar-block w3-border growth30-dropdown">
+    <a href="#growth30-45cm" class="w3-bar-item w3-button">45cm</a>
+    <a href="#growth30-50cm" class="w3-bar-item w3-button">50cm</a>
+    <a href="#growth30-55cm" class="w3-bar-item w3-button">55cm</a>
+    <a href="#growth30-60cm" class="w3-bar-item w3-button">60cm</a>
+    <a href="#growth30-65cm" class="w3-bar-item w3-button">65cm</a>
+  </div>
+</div>
+
+<!-- Final Output -->
+<div class="w3-dropdown-hover">
+  <a href="#finaloutput" class="w3-button"><i class="fas fa-check-circle"></i> Final Output</a>
+  <div class="w3-dropdown-content w3-bar-block w3-border final-output-dropdown">
+    <a href="#finaloutput-45cm" class="w3-bar-item w3-button">45cm</a>
+    <a href="#finaloutput-50cm" class="w3-bar-item w3-button">50cm</a>
+    <a href="#finaloutput-55cm" class="w3-bar-item w3-button">55cm</a>
+    <a href="#finaloutput-60cm" class="w3-bar-item w3-button">60cm</a>
+    <a href="#finaloutput-65cm" class="w3-bar-item w3-button">65cm</a>
+  </div>
+</div>
+
+
+  <!-- Simple Links for TREE DISTRIBUTION and ANALYSIS -->
+  <a href="#tree-distribution" class="w3-bar-item w3-button"><i class="fas fa-globe"></i> Tree Distribution</a>
+  <a href="#analysis" class="w3-bar-item w3-button"><i class="fas fa-chart-line"></i> Analysis</a>
+</div>
+
+<!-- Sections for each category -->
+<div id="home" class="section">
+  <h1>Welcome to the Home Section</h1>
+  <p>This is the main home section of the website.</p>
+</div>
+
+<!-- Tree PerHa Section -->
+<div id="treeperha" class="section">
+  <h1>Tree PerHa</h1>
+  <p>Details about Tree PerHa.</p>
+</div>
+
+<!-- Fell Tree Section -->
+<div id="felltree" class="section">
+  <h1>Fell Tree</h1>
+  <p>Details about Fell Tree.</p>
+</div>
+
+<!-- Production 0 Section and its sub-subcategories -->
+<div id="prod0" class="section">
+  <h1>Production 0</h1>
+  <a href="#prod0-45cm" class="w3-bar-item w3-button">Cutting Regime 45cm</a>
+  <a href="#prod0-50cm" class="w3-bar-item w3-button">Cutting Regime 50cm</a>
+  <a href="#prod0-55cm" class="w3-bar-item w3-button">Cutting Regime 55cm</a>
+  <a href="#prod0-60cm" class="w3-bar-item w3-button">Cutting Regime 60cm</a>
+  <a href="#prod0-65cm" class="w3-bar-item w3-button">Cutting Regime 65cm</a>
+</div>
+
+<div id="prod0-45cm" class="section">
+  <h1>Cutting Regime 45cm (Production 0)</h1>
+  <p>Details for Cutting Regime 45cm under Production 0.</p>
+</div>
+<div id="prod0-50cm" class="section">
+  <h1>Cutting Regime 50cm (Production 0)</h1>
+  <p>Details for Cutting Regime 50cm under Production 0.</p>
+</div>
+<div id="prod0-55cm" class="section">
+  <h1>Cutting Regime 55cm (Production 0)</h1>
+  <p>Details for Cutting Regime 55cm under Production 0.</p>
+</div>
+<div id="prod0-60cm" class="section">
+  <h1>Cutting Regime 60cm (Production 0)</h1>
+  <p>Details for Cutting Regime 60cm under Production 0.</p>
+</div>
+<div id="prod0-65cm" class="section">
+  <h1>Cutting Regime 65cm (Production 0)</h1>
+  <p>Details for Cutting Regime 65cm under Production 0.</p>
+</div>
+
+<!-- Production 30 Section and its sub-subcategories -->
+<div id="prod30" class="section">
+  <h1>Production 30</h1>
+  <a href="#prod30-45cm" class="w3-bar-item w3-button">Cutting Regime 45cm</a>
+  <a href="#prod30-50cm" class="w3-bar-item w3-button">Cutting Regime 50cm</a>
+  <a href="#prod30-55cm" class="w3-bar-item w3-button">Cutting Regime 55cm</a>
+  <a href="#prod30-60cm" class="w3-bar-item w3-button">Cutting Regime 60cm</a>
+  <a href="#prod30-65cm" class="w3-bar-item w3-button">Cutting Regime 65cm</a>
+</div>
+
+<div id="prod30-45cm" class="section">
+  <h1>Cutting Regime 45cm (Production 30)</h1>
+  <p>Details for Cutting Regime 45cm under Production 30.</p>
+</div>
+<div id="prod30-50cm" class="section">
+  <h1>Cutting Regime 50cm (Production 30)</h1>
+  <p>Details for Cutting Regime 50cm under Production 30.</p>
+</div>
+<div id="prod30-55cm" class="section">
+  <h1>Cutting Regime 55cm (Production 30)</h1>
+  <p>Details for Cutting Regime 55cm under Production 30.</p>
+</div>
+<div id="prod30-60cm" class="section">
+  <h1>Cutting Regime 60cm (Production 30)</h1>
+  <p>Details for Cutting Regime 60cm under Production 30.</p>
+</div>
+<div id="prod30-65cm" class="section">
+  <h1>Cutting Regime 65cm (Production 30)</h1>
+  <p>Details for Cutting Regime 65cm under Production 30.</p>
+</div>
+
+<!-- Stem Damage Section and its sub-subcategories -->
+<div id="stemdamage" class="section">
+  <h1>Stem Damage</h1>
+  <a href="#stemdamage-45cm" class="w3-bar-item w3-button">Cutting Regime 45cm</a>
+  <a href="#stemdamage-50cm" class="w3-bar-item w3-button">Cutting Regime 50cm</a>
+  <a href="#stemdamage-55cm" class="w3-bar-item w3-button">Cutting Regime 55cm</a>
+  <a href="#stemdamage-60cm" class="w3-bar-item w3-button">Cutting Regime 60cm</a>
+  <a href="#stemdamage-65cm" class="w3-bar-item w3-button">Cutting Regime 65cm</a>
+</div>
+
+<div id="stemdamage-45cm" class="section">
+  <h1>Cutting Regime 45cm (Stem Damage)</h1>
+  <p>Details for Cutting Regime 45cm under Stem Damage.</p>
+</div>
+<div id="stemdamage-50cm" class="section">
+  <h1>Cutting Regime 50cm (Stem Damage)</h1>
+  <p>Details for Cutting Regime 50cm under Stem Damage.</p>
+</div>
+<div id="stemdamage-55cm" class="section">
+  <h1>Cutting Regime 55cm (Stem Damage)</h1>
+  <p>Details for Cutting Regime 55cm under Stem Damage.</p>
+</div>
+<div id="stemdamage-60cm" class="section">
+  <h1>Cutting Regime 60cm (Stem Damage)</h1>
+  <p>Details for Cutting Regime 60cm under Stem Damage.</p>
+</div>
+<div id="stemdamage-65cm" class="section">
+  <h1>Cutting Regime 65cm (Stem Damage)</h1>
+  <p>Details for Cutting Regime 65cm under Stem Damage.</p>
+</div>
+
+<!-- Crown Damage Section and its sub-subcategories -->
+<div id="crowndamage" class="section">
+  <h1>Crown Damage</h1>
+  <a href="#crowndamage-45cm" class="w3-bar-item w3-button">Cutting Regime 45cm</a>
+  <a href="#crowndamage-50cm" class="w3-bar-item w3-button">Cutting Regime 50cm</a>
+  <a href="#crowndamage-55cm" class="w3-bar-item w3-button">Cutting Regime 55cm</a>
+  <a href="#crowndamage-60cm" class="w3-bar-item w3-button">Cutting Regime 60cm</a>
+  <a href="#crowndamage-65cm" class="w3-bar-item w3-button">Cutting Regime 65cm</a>
+</div>
+
+<div id="crowndamage-45cm" class="section">
+  <h1>Cutting Regime 45cm (Crown Damage)</h1>
+  <p>Details for Cutting Regime 45cm under Crown Damage.</p>
+<div id="crowndamage-50cm" class="section">
+  <h1>Cutting Regime 50cm (Crown Damage)</h1>
+  <p>Details for Cutting Regime 50cm under Crown Damage.</p>
+</div>
+<div id="crowndamage-55cm" class="section">
+  <h1>Cutting Regime 55cm (Crown Damage)</h1>
+  <p>Details for Cutting Regime 55cm under Crown Damage.</p>
+</div>
+<div id="crowndamage-60cm" class="section">
+  <h1>Cutting Regime 60cm (Crown Damage)</h1>
+  <p>Details for Cutting Regime 60cm under Crown Damage.</p>
+</div>
+<div id="crowndamage-65cm" class="section">
+  <h1>Cutting Regime 65cm (Crown Damage)</h1>
+  <p>Details for Cutting Regime 65cm under Crown Damage.</p>
+</div>
+
+<!-- Growth30 Section and its sub-subcategories -->
+<div id="growth30" class="section">
+  <h1>Growth30</h1>
+  <a href="#growth30-45cm" class="w3-bar-item w3-button">Cutting Regime 45cm</a>
+  <a href="#growth30-50cm" class="w3-bar-item w3-button">Cutting Regime 50cm</a>
+  <a href="#growth30-55cm" class="w3-bar-item w3-button">Cutting Regime 55cm</a>
+  <a href="#growth30-60cm" class="w3-bar-item w3-button">Cutting Regime 60cm</a>
+  <a href="#growth30-65cm" class="w3-bar-item w3-button">Cutting Regime 65cm</a>
+</div>
+
+<div id="growth30-45cm" class="section">
+  <h1>Cutting Regime 45cm (Growth30)</h1>
+  <p>Details for Cutting Regime 45cm under Growth30.</p>
+</div>
+<div id="growth30-50cm" class="section">
+  <h1>Cutting Regime 50cm (Growth30)</h1>
+  <p>Details for Cutting Regime 50cm under Growth30.</p>
+</div>
+<div id="growth30-55cm" class="section">
+  <h1>Cutting Regime 55cm (Growth30)</h1>
+  <p>Details for Cutting Regime 55cm under Growth30.</p>
+</div>
+<div id="growth30-60cm" class="section">
+  <h1>Cutting Regime 60cm (Growth30)</h1>
+  <p>Details for Cutting Regime 60cm under Growth30.</p>
+</div>
+<div id="growth30-65cm" class="section">
+  <h1>Cutting Regime 65cm (Growth30)</h1>
+  <p>Details for Cutting Regime 65cm under Growth30.</p>
+</div>
+
+<!-- Final Output Section and its sub-subcategories -->
+<div id="finaloutput" class="section">
+  <h1>Final Output</h1>
+  <a href="#finaloutput-45cm" class="w3-bar-item w3-button">Cutting Regime 45cm</a>
+  <a href="#finaloutput-50cm" class="w3-bar-item w3-button">Cutting Regime 50cm</a>
+  <a href="#finaloutput-55cm" class="w3-bar-item w3-button">Cutting Regime 55cm</a>
+  <a href="#finaloutput-60cm" class="w3-bar-item w3-button">Cutting Regime 60cm</a>
+  <a href="#finaloutput-65cm" class="w3-bar-item w3-button">Cutting Regime 65cm</a>
+</div>
+
+<div id="finaloutput-45cm" class="section">
+  <h1>Cutting Regime 45cm (Final Output)</h1>
+  <p>Details for Cutting Regime 45cm under Final Output.</p>
+</div>
+<div id="finaloutput-50cm" class="section">
+  <h1>Cutting Regime 50cm (Final Output)</h1>
+  <p>Details for Cutting Regime 50cm under Final Output.</p>
+</div>
+<div id="finaloutput-55cm" class="section">
+  <h1>Cutting Regime 55cm (Final Output)</h1>
+  <p>Details for Cutting Regime 55cm under Final Output.</p>
+</div>
+<div id="finaloutput-60cm" class="section">
+  <h1>Cutting Regime 60cm (Final Output)</h1>
+  <p>Details for Cutting Regime 60cm under Final Output.</p>
+</div>
+<div id="finaloutput-65cm" class="section">
+  <h1>Cutting Regime 65cm (Final Output)</h1>
+  <p>Details for Cutting Regime 65cm under Final Output.</p>
+</div>
+
+<!-- Tree Distribution Section -->
+<div id="tree-distribution" class="section">
+  <h1>Tree Distribution</h1>
+  <p>Content for Tree Distribution.</p>
+</div>
+
+<!-- Analysis Section -->
+<div id="analysis" class="section">
+  <h1>Analysis</h1>
+  <p>Content for Analysis.</p>
+</div>
+
+</body>
+</html>
